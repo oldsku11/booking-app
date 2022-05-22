@@ -58,6 +58,7 @@ func getFirstNames() []string {
 		var names = strings.Fields(booking)
 		firstNames = append(firstNames, names[0])
 	}
+
 	return firstNames
 }
 
@@ -96,5 +97,6 @@ func bookTicket(userTickets uint8, firstName string, lastName string, email stri
 
 	fmt.Printf("\nThank you %s %s for booking %d tickets. You will receive a confirmation email at %s\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%d tickets remaining for %s\n\n", remainingTickets, conferenceName)
+
 	return remainingTickets, bookings
 }
