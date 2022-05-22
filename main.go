@@ -19,11 +19,7 @@ func main() {
 		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
-			remainingTickets = remainingTickets - userTickets
-			bookings = append(bookings, firstName+" "+lastName)
-
-			fmt.Printf("\nThank you %s %s for booking %d tickets. You will receive a confirmation email at %s\n", firstName, lastName, userTickets, email)
-			fmt.Printf("%d tickets remaining for %s\n\n", remainingTickets, conferenceName)
+			remainingTickets, bookings = bookTicket(remainingTickets, userTickets, bookings, firstName, lastName, email, conferenceName)
 
 			firstNames := getFirstNames(bookings)
 			fmt.Printf("The first names of bookings are: %v\n", firstNames)
@@ -45,6 +41,15 @@ func main() {
 			}
 		}
 	}
+}
+
+func bookTicket(remainingTickets uint8, userTickets uint8, bookings []string, firstName string, lastName string, email string, conferenceName string) (uint8, []string) {
+	remainingTickets = remainingTickets - userTickets
+	bookings = append(bookings, firstName+" "+lastName)
+
+	fmt.Printf("\nThank you %s %s for booking %d tickets. You will receive a confirmation email at %s\n", firstName, lastName, userTickets, email)
+	fmt.Printf("%d tickets remaining for %s\n\n", remainingTickets, conferenceName)
+	return remainingTickets, bookings
 }
 
 func greetUser(conferenceName string, conferenceTickets int, remainingTickets uint8) {
